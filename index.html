@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="./scripts/app.js" defer></script>
+    <title>Task Manager</title>
+  </head>
+  <body>
+    <template id="template">
+      <div class="task-box">
+        <p></p>
+        <button>Switch</button>
+      </div>
+    </template>
+    <header>
+      <h1>Task manager</h1>
+      <p>Manage your tasks</p>
+      <form id="task-field">
+        <input type="text" id="tasks" placeholder="Write your task here" />
+        <button id="submit-btn" type="submit">Add</button>
+      </form>
+    </header>
+    <section class="column-container">
+      <div id="backlog" class="column">
+        <h1>Backlog</h1>
+        <div id="backlog-container" class="task-container">
+          <!-- <div class="task-box">
+            <p>Bla</p>
+          </div> -->
+        </div>
+      </div>
+      <div id="in-progress-container" class="column">
+        <h1>In progress</h1>
+        <div class="task-container">
+
+        </div>
+      </div>
+      <div id="completed-container" class="column">
+        <h1>Completed</h1>
+        <div class="task-container">
+
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
