@@ -46,6 +46,7 @@ header {
   display: flex;
   flex: 1;
   flex-direction: column;
+  max-width: 500px;
   min-height: 500px;
   background-color: skyblue;
   margin: 0 10px;
@@ -57,20 +58,17 @@ header {
   text-align: center;
 }
 
-.task-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-}
 
 .task-box {
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: space-between;
   max-width: 200px;
   min-height: 100px;
+  margin: auto;
   border-style: solid;
+  border-radius: 5px;
 }
 
 .task-box p {
@@ -83,5 +81,6 @@ header {
 }
 
 .task-box button {
-
+  width: 100%;
+  margin: 0 auto;
 }
