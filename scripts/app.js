@@ -2,6 +2,7 @@ const form = document.getElementById('task-field');
 const addBtn = document.getElementById('submit-btn');
 const backlogEl = document.getElementById('backlog-container');
 const inProgressEl = document.getElementById('in-progress-container');
+const completedEl = document.getElementById('completed-container');
 
 const backlog = [];
 const inProgress = [];
@@ -35,8 +36,19 @@ function updateBacklog() {
   backlogTasks.forEach((task) => {
     task.addEventListener('click', () => {
       inProgressEl.append(task);
+      updateInProgress()
     });
   });
   console.log(backlogTasks);
   return backlogTasks;
+}
+
+function updateInProgress() {
+  const inprogressTasks = inProgressEl.querySelectorAll('.task-box')
+  console.log(inprogressTasks)
+  inprogressTasks.forEach((task) => {
+    task.addEventListener('click', () => {
+      completedEl.append(task);
+    })
+  })
 }
