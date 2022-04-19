@@ -10,9 +10,9 @@
   </head>
   <body>
     <template id="template">
-      <div class="task-box">
+      <div class="task-box" draggable="true">
         <p></p>
-        <button>Switch</button>
+        <button>Delete</button>
       </div>
     </template>
     <header>
@@ -32,15 +32,13 @@
           </div> -->
         </div>
       </div>
-      <div id="in-progress" class="column">
+      <div id="inprogress" class="column">
         <h1>In progress</h1>
-        <div id="in-progress-container" class="task-container">
-
-        </div>
+        <div id="inprogress-container" class="task-container"></div>
       </div>
       <div id="completed" class="column">
         <h1>Completed</h1>
-        <div id="completed-container">
+        <div id="completed-container" class="task-container">
 
         </div>
       </div>

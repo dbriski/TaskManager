@@ -84,3 +84,7 @@ header {
   width: 100%;
   margin: 0 auto;
 }
+
+.droppable {
+  background-color: rgb(138, 235, 135);
+}
