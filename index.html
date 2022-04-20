@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./styles/style.css" />
     <script src="./scripts/app.js" defer></script>
     <title>Task Manager</title>
   </head>
@@ -12,7 +19,12 @@
     <template id="template">
       <div class="task-box" draggable="true">
         <p></p>
-        <button>Delete</button>
+        <div>
+          <h3></h3>
+          <button>
+            <i class="fa-solid fa-x fa-xs"></i>
+          </button>
+        </div>
       </div>
     </template>
     <header>
@@ -24,23 +36,17 @@
       </form>
     </header>
     <section class="column-container">
-      <div id="backlog" class="column">
+      <div id="backlog-container" class="task-container">
         <h1>Backlog</h1>
-        <div id="backlog-container" class="task-container">
-          <!-- <div class="task-box">
+        <!-- <div class="task-box">
             <p>Bla</p>
           </div> -->
-        </div>
       </div>
-      <div id="inprogress" class="column">
+      <div id="inprogress-container" class="task-container">
         <h1>In progress</h1>
-        <div id="inprogress-container" class="task-container"></div>
       </div>
-      <div id="completed" class="column">
+      <div id="completed-container" class="task-container">
         <h1>Completed</h1>
-        <div id="completed-container" class="task-container">
-
-        </div>
       </div>
     </section>
   </body>

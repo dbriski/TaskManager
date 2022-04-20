@@ -42,7 +42,7 @@ header {
   padding: 20px;
 }
 
-.column {
+.task-container {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -53,7 +53,7 @@ header {
   padding: 20px;
 }
 
-.column h1 {
+.task-container h1 {
   padding-bottom: 20px;
   text-align: center;
 }
@@ -61,14 +61,19 @@ header {
 
 .task-box {
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+  flex: 0;
+  justify-content: flex-end;
   max-width: 200px;
   min-height: 100px;
-  margin: auto;
+  margin-left: 30px;
   border-style: solid;
   border-radius: 5px;
+}
+
+.task-box div {
+  display: flex;
+  justify-content: space-between;
 }
 
 .task-box p {
@@ -81,10 +86,20 @@ header {
 }
 
 .task-box button {
-  width: 100%;
-  margin: 0 auto;
+  width: 10%;
+  height: 10%;
+  border-radius: 20%;
+  opacity: 0.5;
 }
 
+.task-box button:hover {
+  width: 10%;
+  height: 10%;
+  border-radius: 20%;
+  opacity: 1;
+}
+
+
 .droppable {
-  background-color: rgb(138, 235, 135);
+  background-color: rgb(102, 235, 102);
 }

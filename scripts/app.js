@@ -4,22 +4,26 @@ const backlogEl = document.getElementById('backlog-container');
 const inProgressEl = document.getElementById('inprogress-container');
 const completedEl = document.getElementById('completed-container');
 
-let idVal = 0;
+let idVal = 1;
 let draggedEl;
 
-const tasks = [];
+let tasks = [];
 const inProgress = [];
 
 function createTask(task) {
   const taskTemplate = document.getElementById('template');
   const taskBody = document.importNode(taskTemplate.content, true);
   taskBody.querySelector('div').setAttribute('id', task.id);
+  taskBody.querySelector('h3').textContent = `Task no. ${task.id}`;
   taskBody.querySelector('p').textContent = task.value;
   backlogEl.append(taskBody);
   tasks.push(task);
 }
 
 function renderTask() {
+  if (idVal <= 0) {
+    idVal = 1;
+  }
   const task = {
     id: idVal++,
     value: form.querySelector('input').value,
@@ -36,11 +40,17 @@ form.addEventListener('submit', (event) => {
 function updateBacklog() {
   const backlogTasks = backlogEl.querySelectorAll('.task-box');
   connectDrag(backlogTasks);
-  connectDroppable('backlog');
+  connectDroppable(backlogTasks);
   backlogTasks.forEach((task) => {
     task.addEventListener('click', (event) => {
       if (event.target.closest('button')) {
+        tasks = tasks.filter((t) => {
+          console.log(t.id)
+          return t.id === task.id
+        });
         task.remove();
+        idVal--;
+        console.log(tasks);
       } else {
         inProgressEl.append(task);
         updateInProgress();
@@ -54,11 +64,13 @@ function updateBacklog() {
 function updateInProgress() {
   const inprogressTasks = inProgressEl.querySelectorAll('.task-box');
   connectDrag(inprogressTasks);
-  connectDroppable('inprogress');
+  connectDroppable(inprogressTasks);
   inprogressTasks.forEach((task) => {
     task.addEventListener('click', (event) => {
       if (event.target.closest('button')) {
+        tasks.filter((t) => t.id !== task.id);
         task.remove();
+        console.log(tasks)
       } else {
         completedEl.append(task);
       }
@@ -69,36 +81,43 @@ function updateInProgress() {
 function connectDrag(tasks) {
   tasks.forEach((task) => {
     task.addEventListener('dragstart', (event) => {
-      event.dataTransfer.setData('text/plain', task);
+      event.dataTransfer.setData('text/plain', task.id);
       event.dataTransfer.effectAllowed = 'move';
-      event.target.style.background = 'purple';
     });
   });
 }
 
-function connectDroppable(type) {
-  const container = document.querySelector(`#${type}-container`);
+function connectDroppable(tasks) {
+  const cont = document.querySelector('.column-container');
 
-    container.addEventListener('dragenter', (event) => {
-      if (event.dataTransfer.types[0] === 'text/plain') {
-        container.parentElement.classList.add('droppable');
-        event.preventDefault();
-      } else {
-        console.log(container);
-        console.log(event);
-        throw new Error('no input');
-      }
-    });
+  cont.addEventListener('dragenter', (event) => {
+    if (event.dataTransfer.types[0] === 'text/plain' && event.target !== cont) {
+      event.target.closest('div').classList.add('droppable');
+      event.preventDefault();
+    }
+  });
 
-    container.addEventListener('dragover', (event) => {
-      if (event.dataTransfer.types[0] === 'text/plain') {
-        event.preventDefault();
-      }
-    });
+  cont.addEventListener('dragover', (event) => {
+    if (event.dataTransfer.types[0] === 'text/plain') {
+      event.preventDefault();
+    }
+  });
 
-  // container.addEventListener('dragleave', (event) => {
-  //   if (event.relatedTarget.closest(`#${type}-container` !== container)) {
-  //     list.parentElement.classList.remove('droppable');
-  //   }
-  // });
+  cont.addEventListener('dragleave', (event) => {
+    if (event.relatedTarget.closest('div') !== cont) {
+      event.target.classList.remove('droppable');
+      console.log(event);
+    }
+  });
+
+  cont.addEventListener('drop', (event) => {
+    const dataId = event.dataTransfer.getData('text/plain');
+    event.preventDefault()
+    console.log(dataId)
+    for (const task of tasks) {
+      if (dataId === task.id) {
+        task.click();
+      } 
+    }
+  });
 }
