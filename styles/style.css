@@ -15,7 +15,7 @@ header {
   padding: 30px;
 }
 
-#tasks {
+#tasks-render {
   height: 50px;
   width: 500px;
   margin: 0 auto;
@@ -64,15 +64,17 @@ header {
   flex-direction: column-reverse;
   flex: 0;
   justify-content: flex-end;
-  max-width: 200px;
-  min-height: 100px;
-  margin-left: 30px;
+  width: 250px;
+  min-height: 150px;
+  margin: 0 auto;
   border-style: solid;
   border-radius: 5px;
 }
 
 .task-box div {
   display: flex;
+  /* width: 50px; */
+  /* margin: 0 auto; */
   justify-content: space-between;
 }
 
@@ -87,15 +89,11 @@ header {
 
 .task-box button {
   width: 10%;
-  height: 10%;
   border-radius: 20%;
   opacity: 0.5;
 }
 
 .task-box button:hover {
-  width: 10%;
-  height: 10%;
-  border-radius: 20%;
   opacity: 1;
 }
 

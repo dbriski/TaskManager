@@ -18,10 +18,11 @@ function createTask(task) {
   taskBody.querySelector('p').textContent = task.value;
   backlogEl.append(taskBody);
   tasks.push(task);
+  form.querySelector('input').value = '';
 }
 
 function renderTask() {
-  if (idVal <= 0) {
+  if (idVal === 0) {
     idVal = 1;
   }
   const task = {
@@ -40,14 +41,11 @@ form.addEventListener('submit', (event) => {
 function updateBacklog() {
   const backlogTasks = backlogEl.querySelectorAll('.task-box');
   connectDrag(backlogTasks);
-  connectDroppable(backlogTasks);
+  connectDroppable('inprogress');
   backlogTasks.forEach((task) => {
     task.addEventListener('click', (event) => {
       if (event.target.closest('button')) {
-        tasks = tasks.filter((t) => {
-          console.log(t.id)
-          return t.id === task.id
-        });
+        tasks = tasks.filter((t) => t.id === task.id);
         task.remove();
         idVal--;
         console.log(tasks);
@@ -64,7 +62,7 @@ function updateBacklog() {
 function updateInProgress() {
   const inprogressTasks = inProgressEl.querySelectorAll('.task-box');
   connectDrag(inprogressTasks);
-  connectDroppable(inprogressTasks);
+  connectDroppable('completed');
   inprogressTasks.forEach((task) => {
     task.addEventListener('click', (event) => {
       if (event.target.closest('button')) {
@@ -87,7 +85,7 @@ function connectDrag(tasks) {
   });
 }
 
-function connectDroppable(tasks) {
+function connectDroppable(type) {
   const cont = document.querySelector('.column-container');
 
   cont.addEventListener('dragenter', (event) => {
@@ -106,18 +104,16 @@ function connectDroppable(tasks) {
   cont.addEventListener('dragleave', (event) => {
     if (event.relatedTarget.closest('div') !== cont) {
       event.target.classList.remove('droppable');
-      console.log(event);
     }
   });
 
   cont.addEventListener('drop', (event) => {
     const dataId = event.dataTransfer.getData('text/plain');
-    event.preventDefault()
-    console.log(dataId)
-    for (const task of tasks) {
-      if (dataId === task.id) {
-        task.click();
+    console.log(event.target.id)
+    console.log(type)
+      if (event.target.id === `${type}-container` ) {
+        document.getElementById(dataId).click(); 
       } 
-    }
+    event.target.classList.remove('droppable');
   });
 }
