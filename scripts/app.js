@@ -3,6 +3,7 @@ const addBtn = document.getElementById('submit-btn');
 const backlogEl = document.getElementById('backlog-container');
 const inProgressEl = document.getElementById('inprogress-container');
 const completedEl = document.getElementById('completed-container');
+const controller = new AbortController();
 
 let idVal = 1;
 let draggedEl;
@@ -38,6 +39,7 @@ form.addEventListener('submit', (event) => {
   updateBacklog();
 });
 
+// DO ALL OVER AGAIN WITH ID TASK CHECK IN WHICH CONTAINER IT IS (TRY WITH IF CONDITION FOR EACH CONTAINER)
 function updateBacklog() {
   const backlogTasks = backlogEl.querySelectorAll('.task-box');
   connectDrag(backlogTasks);
@@ -48,12 +50,14 @@ function updateBacklog() {
         tasks = tasks.filter((t) => t.id === task.id);
         task.remove();
         idVal--;
-        console.log(tasks);
+        console.log(task.id);
       } else {
         inProgressEl.append(task);
+        console.log(task.id);
         updateInProgress();
+        console.log(task.id);
       }
-    });
+    }, { signal: controller.signal });
   });
   console.log(backlogTasks);
   return backlogTasks;
@@ -61,19 +65,21 @@ function updateBacklog() {
 
 function updateInProgress() {
   const inprogressTasks = inProgressEl.querySelectorAll('.task-box');
+  console.log(inprogressTasks)
   connectDrag(inprogressTasks);
   connectDroppable('completed');
-  inprogressTasks.forEach((task) => {
-    task.addEventListener('click', (event) => {
-      if (event.target.closest('button')) {
-        tasks.filter((t) => t.id !== task.id);
-        task.remove();
-        console.log(tasks)
-      } else {
-        completedEl.append(task);
-      }
-    });
-  });
+  // inprogressTasks.forEach((task) => {
+  //   task.addEventListener('click', (event) => {
+  //     if (event.target.closest('button')) {
+  //       tasks.filter((t) => t.id !== task.id);
+  //       task.remove();
+  //       console.log(tasks)
+  //     } else {
+  //       completedEl.append(task);
+  //       console.log(task.id)   
+  //     }
+  //   });
+  // });
 }
 
 function connectDrag(tasks) {
