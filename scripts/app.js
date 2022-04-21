@@ -8,7 +8,12 @@ const controller = new AbortController();
 let idVal = 1;
 let draggedEl;
 
+let currentActiveContainer;
+
 let tasks = [];
+let tasksBack = [];
+let tasksInpr = [];
+let tasksCompl = [];
 const inProgress = [];
 
 function createTask(task) {
@@ -36,50 +41,84 @@ function renderTask() {
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   renderTask();
+  switchContainer(tasks);
   updateBacklog();
 });
 
+function switchContainer(tasks) {
+  const backlogTasks = backlogEl.querySelectorAll('.task-box');
+  const inprogressTasks = inProgressEl.querySelectorAll('.task-box');
+  const completedTasks = completedEl.querySelectorAll('.task-box');
+  for (let i = 0; i < tasks.length; i++) {
+    if (backlogTasks[i].id == tasks[i].id) {
+      currentActiveContainer = backlogTasks;
+      console.log(currentActiveContainer);
+    } else if (inprogressTasks[i].id == tasks[i].id) {
+      currentActiveContainer = inprogressTasks;
+      console.log(currentActiveContainer);
+      continue;
+    } else if (completedEl[i].id == tasks[i].id) {
+      currentActiveContainer = completedTasks;
+      console.log(currentActiveContainer);
+    }
+  }
+  return currentActiveContainer;
+}
+
 // DO ALL OVER AGAIN WITH ID TASK CHECK IN WHICH CONTAINER IT IS (TRY WITH IF CONDITION FOR EACH CONTAINER)
 function updateBacklog() {
-  const backlogTasks = backlogEl.querySelectorAll('.task-box');
-  connectDrag(backlogTasks);
-  connectDroppable('inprogress');
-  backlogTasks.forEach((task) => {
-    task.addEventListener('click', (event) => {
-      if (event.target.closest('button')) {
-        tasks = tasks.filter((t) => t.id === task.id);
-        task.remove();
-        idVal--;
-        console.log(task.id);
-      } else {
-        inProgressEl.append(task);
-        console.log(task.id);
-        updateInProgress();
-        console.log(task.id);
-      }
-    }, { signal: controller.signal });
+  // connectDrag(currentActiveContainer);
+  // connectDroppable('inprogress');
+  currentActiveContainer.forEach((task) => {
+    task.addEventListener(
+      'click',
+      (event) => {
+        if (event.target.closest('button')) {
+          tasks = tasks.filter((t) => t.id === task.id);
+          task.remove();
+          idVal--;
+          console.log(task.id);
+        } else {
+          const taskID = tasks.findIndex(t => t.id == task.id)
+          const taskIDObj = tasks.find(t => t.id == task.id)
+          if (taskIDObj) {
+            tasksInpr.push(taskIDObj);
+          }
+          tasks.splice(taskID, 1)
+          console.log(task.id)
+          console.log(taskID)
+          inProgressEl.append(task);
+          console.log(currentActiveContainer);
+          // updateInProgress();
+        }
+      },
+      { signal: controller.signal }
+    );
   });
-  console.log(backlogTasks);
-  return backlogTasks;
+  switchContainer(tasks);
+  console.log(tasks)
+  console.log(tasksInpr)
+  console.log(currentActiveContainer);
+  // return currentActiveContainer;
 }
 
 function updateInProgress() {
   const inprogressTasks = inProgressEl.querySelectorAll('.task-box');
-  console.log(inprogressTasks)
-  connectDrag(inprogressTasks);
-  connectDroppable('completed');
-  // inprogressTasks.forEach((task) => {
-  //   task.addEventListener('click', (event) => {
-  //     if (event.target.closest('button')) {
-  //       tasks.filter((t) => t.id !== task.id);
-  //       task.remove();
-  //       console.log(tasks)
-  //     } else {
-  //       completedEl.append(task);
-  //       console.log(task.id)   
-  //     }
-  //   });
-  // });
+  console.log(inprogressTasks);
+  // connectDrag(inprogressTasks);
+  // connectDroppable('completed');
+  inprogressTasks.forEach((task) => {
+    task.addEventListener('click', (event) => {
+      if (event.target.closest('button')) {
+        tasks.filter((t) => t.id !== task.id);
+        task.remove();
+        console.log(tasks);
+      } else {
+        completedEl.append(task);
+        console.log(task.id);
+      }
+    });
+  });
 }
 
 function connectDrag(tasks) {
@@ -115,11 +154,11 @@ function connectDroppable(type) {
 
   cont.addEventListener('drop', (event) => {
     const dataId = event.dataTransfer.getData('text/plain');
-    console.log(event.target.id)
-    console.log(type)
-      if (event.target.id === `${type}-container` ) {
-        document.getElementById(dataId).click(); 
-      } 
+    console.log(event.target.id);
+    console.log(type);
+    if (event.target.id === `${type}-container`) {
+      document.getElementById(dataId).click();
+    }
     event.target.classList.remove('droppable');
   });
 }
