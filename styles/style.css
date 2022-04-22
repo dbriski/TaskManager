@@ -61,9 +61,9 @@ header {
 
 .task-box {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   flex: 0;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 250px;
   min-height: 150px;
   margin: 0 auto;
@@ -96,6 +96,15 @@ header {
 .task-box button:hover {
   opacity: 1;
 }
+
+/* .desc {
+  display: flex;
+  justify-self: start;
+} */
+
+/* .switch-btns {
+  display: flex;
+} */
 
 
 .droppable {

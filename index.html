@@ -18,11 +18,21 @@
   <body>
     <template id="template">
       <div class="task-box" draggable="true">
-        <p></p>
         <div>
           <h3></h3>
           <button>
             <i class="fa-solid fa-x fa-xs"></i>
+          </button>
+        </div>
+        <div class="desc">
+          <p></p>
+        </div>
+        <div class="switch-btns">
+          <button id="prev">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <button id="next">
+            <i class="fa-solid fa-angle-right"></i>
           </button>
         </div>
       </div>
@@ -31,7 +41,11 @@
       <h1>Task manager</h1>
       <p>Manage your tasks</p>
       <form id="task-field">
-        <input type="text" id="tasks-render" placeholder="Write your task here" />
+        <input
+          type="text"
+          id="tasks-render"
+          placeholder="Write your task here"
+        />
         <button id="submit-btn" type="submit">Add</button>
       </form>
     </header>

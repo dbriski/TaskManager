@@ -3,19 +3,14 @@ const addBtn = document.getElementById('submit-btn');
 const backlogEl = document.getElementById('backlog-container');
 const inProgressEl = document.getElementById('inprogress-container');
 const completedEl = document.getElementById('completed-container');
-const controller = new AbortController();
+const containers = document.querySelectorAll('.task-container');
 
 let idVal = 1;
 let draggedEl;
 
-let currentActiveContainer = backlogEl;
-let currentActiveTasks = backlogEl.querySelectorAll('.task-box');
+let currentActive = 1;
 
 let tasks = [];
-let tasksBack = [];
-let tasksInpr = [];
-let tasksCompl = [];
-const inProgress = [];
 
 function createTask(task) {
   const taskTemplate = document.getElementById('template');
@@ -26,7 +21,6 @@ function createTask(task) {
   backlogEl.append(taskBody);
   tasks.push(task);
   form.querySelector('input').value = '';
-  currentActiveTasks = backlogEl.querySelectorAll('.task-box');
 }
 
 function renderTask() {
@@ -43,98 +37,84 @@ function renderTask() {
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   renderTask();
-  update(currentActiveTasks);
-  // switchContainer(tasks);
-  console.log(tasks)
-  console.log(currentActiveContainer)
-  console.log(currentActiveTasks)
-  // updateBacklog();
+  console.log(containers);
+  update();
 });
 
-// function switchContainer(task) {
-//   const backlogTasks = backlogEl.querySelectorAll('.task-box');
-//   const inprogressTasks = inProgressEl.querySelectorAll('.task-box');
-//   const completedTasks = completedEl.querySelectorAll('.task-box');
+function update() {
+  containers.forEach((cont) => {
+    const selected = cont.querySelectorAll('.task-box');
+    console.log(selected);
+    for (const task of selected) {
+      console.log(task)
+      const prevBtn = task.querySelector('.switch-btns button:first-of-type')
+      const nextBtn = task.querySelector('.switch-btns button:last-of-type');
+      const classes = task.classList;      
+            const appendNextFun = appendNext.bind(this, task);
+            const appendPrevFun = appendPrev.bind(this, task);
+      // console.log(classes)
+      if (classes[1] == 'active') {
+        console.log('bla');
+        nextBtn.removeEventListener('click', appendNextFun);
+        prevBtn.removeEventListener('click', appendPrevFun);
+        continue;
+      } 
 
-
-// }
-
-function update(currentActiveTasks) {
-  console.log(currentActiveTasks)
-  currentActiveTasks.forEach(task => {
-    task.addEventListener('click', taskHandler.bind(this, task))
-  })
+      // task.classList.add('completed-active');
+      task.classList.add('active');
+      console.log(classes)
+      console.log(task)
+      nextBtn.addEventListener('click', appendNextFun);
+      prevBtn.addEventListener('click', appendPrevFun);
+    };
+  });
 }
 
-function taskHandler(task) {
+function appendNext(task) {
   if (task.parentElement.id == 'backlog-container') {
     inProgressEl.append(task);
-    currentActiveTasks = inProgressEl.querySelectorAll('.task-box');
-    currentActiveContainer = inProgressEl;
-    update(currentActiveTasks)
-  } else if (task.parentElement.id == 'inprogress-container') {
+    task.classList.add('inprogress-active')
+  } else if (task.parentElement.id == 'inprogress-container' ) {
     completedEl.append(task);
-    currentActiveTasks = completedEl.querySelectorAll('.task-box');
-    currentActiveContainer = completedEl;
-    update(currentActiveTasks)
+    task.classList.remove('inprogress-active')
+    task.classList.add('completed-active')
   }
+  update()
 }
 
-// DO ALL OVER AGAIN WITH ID TASK CHECK IN WHICH CONTAINER IT IS (TRY WITH IF CONDITION FOR EACH CONTAINER)
-function updateBacklog() {
-  // connectDrag(currentActiveContainer);
-  // connectDroppable('inprogress');
-  currentActiveContainer.forEach((task) => {
-    task.addEventListener(
-      'click',
-      (event) => {
-        if (event.target.closest('button')) {
-          tasks = tasks.filter((t) => t.id === task.id);
-          task.remove();
-          idVal--;
-          console.log(task.id);
-        } else {
-          const taskID = tasks.findIndex(t => t.id == task.id)
-          const taskIDObj = tasks.find(t => t.id == task.id)
-          if (taskIDObj) {
-            tasksInpr.push(taskIDObj);
-          }
-          tasks.splice(taskID, 1)
-          console.log(task.id)
-          console.log(taskID)
-          inProgressEl.append(task);
-          console.log(currentActiveContainer);
-          // updateInProgress();
-        }
-      },
-      { signal: controller.signal }
-    );
-  });
-  switchContainer(tasks);
-  console.log(tasks)
-  console.log(tasksInpr)
-  console.log(currentActiveContainer);
-  // return currentActiveContainer;
+function appendPrev(task) {
+  console.log(task.parentElement.id)
+  if (task.parentElement.id == 'completed-container') {
+    console.log('bla')
+    inProgressEl.append(task);
+    task.classList.remove('completed-active')
+    task.classList.add('inprogress-active')
+  } else if (task.parentElement.id == 'inprogress-container' ) {
+    backlogEl.append(task);
+    task.classList.remove('inprogress-active')
+    task.classList.add('backlog-active')
+  }
+  update()
 }
 
-// function updateInProgress() {
-//   const inprogressTasks = inProgressEl.querySelectorAll('.task-box');
-//   console.log(inprogressTasks);
-//   // connectDrag(inprogressTasks);
-//   // connectDroppable('completed');
-//   inprogressTasks.forEach((task) => {
-//     task.addEventListener('click', (event) => {
-//       if (event.target.closest('button')) {
-//         tasks.filter((t) => t.id !== task.id);
-//         task.remove();
-//         console.log(tasks);
-//       } else {
-//         completedEl.append(task);
-//         console.log(task.id);
-//       }
-//     });
+// function nextTaskNav() {
+//   const nextBtn = document.querySelector('.switch-btns button:last-of-type');
+//   nextBtn.addEventListener('click', () => {
+//     currentActive++;
+
+//     if (currentActive < containers.length) {
+//       currentActive = containers.length;
+//     }
+
+//     update();
 //   });
 // }
+
+
+
+
+
+
 
 function connectDrag(tasks) {
   tasks.forEach((task) => {
