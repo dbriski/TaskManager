@@ -62,7 +62,7 @@ header {
   display: flex;
   flex: 1;
   flex-direction: column;
-  max-width: 500px;
+  max-width: 330px;
   min-height: 500px;
   background-color: #F3EEE7;
   border-radius: 4px;
@@ -72,8 +72,6 @@ header {
 }
 
 .task-container h1 {
-  width: 70%;
-  margin: 0 auto;
   /* background-color: slateblue; */
   padding-bottom: 20px;
   border-radius: 4px;
@@ -83,49 +81,50 @@ header {
 .task-box {
   display: flex;
   flex-direction: column;
-  flex: 0;
-  justify-content: space-between;
-  width: 250px;
-  min-height: 100px;
+  padding: 4px 6px;
+  width: 100%;
   margin: 0 auto;
-  border-style: solid;
+  margin-bottom: 12px;
+  min-height: 100px;
+  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 
-.task-box div {
+.row {
   display: flex;
-  /* width: 50px; */
-  /* margin: 0 auto; */
   justify-content: space-between;
 }
 
-.task-box p {
+.task-description {
+  display: flex;
+  flex: 1;
+}
+
+.task-description > p {
   white-space: wrap;
   word-wrap: break-word;
-  font-size: 20px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 6px 0;
   overflow: hidden;
   display: inline-block;
   text-overflow: ellipsis;
 }
 
 .task-box button {
-  width: 10%;
+  border: none;
+  font-size: 18px;
+  width: fit-content;
   border-radius: 20%;
   opacity: 0.5;
+  padding: 4px 12px;
 }
 
 .task-box button:hover {
   opacity: 1;
+  background-color: rgba(150, 150, 150, 0.1);
+  cursor: pointer;
 }
-
-/* .desc {
-  display: flex;
-  justify-self: start;
-} */
-
-/* .switch-btns {
-  display: flex;
-} */
 
 .droppable {
   background-color: rgb(102, 235, 102);

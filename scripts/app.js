@@ -46,55 +46,55 @@ function update() {
     const selected = cont.querySelectorAll('.task-box');
     console.log(selected);
     for (const task of selected) {
-      console.log(task)
-      const prevBtn = task.querySelector('.switch-btns button:first-of-type')
-      const nextBtn = task.querySelector('.switch-btns button:last-of-type');
-      const classes = task.classList;      
-            const appendNextFun = appendNext.bind(this, task);
-            const appendPrevFun = appendPrev.bind(this, task);
+      console.log(task);
+      const prevBtn = task.querySelector('#switch-btns button:first-of-type');
+      const nextBtn = task.querySelector('#switch-btns button:last-of-type');
+      const classes = task.classList;
+      const appendNextFun = appendNext.bind(this, task);
+      const appendPrevFun = appendPrev.bind(this, task);
       // console.log(classes)
       if (classes[1] == 'active') {
         console.log('bla');
         nextBtn.removeEventListener('click', appendNextFun);
         prevBtn.removeEventListener('click', appendPrevFun);
         continue;
-      } 
+      }
 
       // task.classList.add('completed-active');
       task.classList.add('active');
-      console.log(classes)
-      console.log(task)
+      console.log(classes);
+      console.log(task);
       nextBtn.addEventListener('click', appendNextFun);
       prevBtn.addEventListener('click', appendPrevFun);
-    };
+    }
   });
 }
 
 function appendNext(task) {
   if (task.parentElement.id == 'backlog-container') {
     inProgressEl.append(task);
-    task.classList.add('inprogress-active')
-  } else if (task.parentElement.id == 'inprogress-container' ) {
+    task.classList.add('inprogress-active');
+  } else if (task.parentElement.id == 'inprogress-container') {
     completedEl.append(task);
-    task.classList.remove('inprogress-active')
-    task.classList.add('completed-active')
+    task.classList.remove('inprogress-active');
+    task.classList.add('completed-active');
   }
-  update()
+  update();
 }
 
 function appendPrev(task) {
-  console.log(task.parentElement.id)
+  console.log(task.parentElement.id);
   if (task.parentElement.id == 'completed-container') {
-    console.log('bla')
+    console.log('bla');
     inProgressEl.append(task);
-    task.classList.remove('completed-active')
-    task.classList.add('inprogress-active')
-  } else if (task.parentElement.id == 'inprogress-container' ) {
+    task.classList.remove('completed-active');
+    task.classList.add('inprogress-active');
+  } else if (task.parentElement.id == 'inprogress-container') {
     backlogEl.append(task);
-    task.classList.remove('inprogress-active')
-    task.classList.add('backlog-active')
+    task.classList.remove('inprogress-active');
+    task.classList.add('backlog-active');
   }
-  update()
+  update();
 }
 
 // function nextTaskNav() {
@@ -109,12 +109,6 @@ function appendPrev(task) {
 //     update();
 //   });
 // }
-
-
-
-
-
-
 
 function connectDrag(tasks) {
   tasks.forEach((task) => {
