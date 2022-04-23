@@ -1,7 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400&family=Montserrat:wght@300;400&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+  min-height: 100vh;
+  background-image: linear-gradient(180deg, #F0E0D6 30%, #F0E0D6 60%, #F0E0D6 100%);
+}
+
+#background-img {
+  position: absolute;
+  z-index: -1;
 }
 
 header {
@@ -29,16 +43,18 @@ header {
   width: 200px;
   margin: 0px auto 0;
   height: 50px;
-  border-radius: 20px;
+  border-radius: 4px;
 }
 
 .column-container {
-  width: 70%;
+  width: 80%;
+  height: auto;
   margin: 0px auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: slateblue;
+  /* background-color: slateblue; */
+  border-radius: 4px;
   padding: 20px;
 }
 
@@ -48,16 +64,21 @@ header {
   flex-direction: column;
   max-width: 500px;
   min-height: 500px;
-  background-color: skyblue;
+  background-color: #F3EEE7;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
   margin: 0 10px;
   padding: 20px;
 }
 
 .task-container h1 {
+  width: 70%;
+  margin: 0 auto;
+  /* background-color: slateblue; */
   padding-bottom: 20px;
+  border-radius: 4px;
   text-align: center;
 }
-
 
 .task-box {
   display: flex;
@@ -65,7 +86,7 @@ header {
   flex: 0;
   justify-content: space-between;
   width: 250px;
-  min-height: 150px;
+  min-height: 100px;
   margin: 0 auto;
   border-style: solid;
   border-radius: 5px;
@@ -105,7 +126,6 @@ header {
 /* .switch-btns {
   display: flex;
 } */
-
 
 .droppable {
   background-color: rgb(102, 235, 102);
