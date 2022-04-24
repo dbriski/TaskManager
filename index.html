@@ -46,7 +46,7 @@
           id="tasks-render"
           placeholder="Write your task here"
         />
-        <button id="submit-btn" type="submit">Add</button>
+        <button id="write-task" type="button">Add task here</button>
       </form>
     </header>
     <section class="column-container">
@@ -63,22 +63,22 @@
         <h1>Completed</h1>
       </div>
     </section>
+    <div id="backdrop"></div>
     <section id="modal-style">
-      <!-- <div id="backdrop"></div> -->
-        <form id="task-modal">
-          <div id="title-field" class="input-box">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" placeholder="Write your title here"/>
-          </div>
-          <div id="description-field" class="input-box"> 
-            <label for="description">Description</label>
-            <textarea name="title" id="description-id" placeholder="Write your task description" rows="5"></textarea>
-          </div>
-          <div id="button-row">
-            <button id="cancel-btn" type="submit">Cancel</button>
-            <button id="confirm-btn" type="submit">Add</button>
-          </div>
-        </form>
+      <form id="task-modal">
+        <div id="title-field" class="input-box">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" placeholder="Write your title here"/>
+        </div>
+        <div id="description-field" class="input-box"> 
+          <label for="description">Description</label>
+          <textarea name="title" id="description" placeholder="Write your task description" rows="5"></textarea>
+        </div>
+        <div id="button-row">
+          <button id="cancel-btn" type="button">Cancel</button>
+          <button id="confirm-btn" type="submit">Add</button>
+        </div>
+      </form>
     </section>
   </body>
 </html>
