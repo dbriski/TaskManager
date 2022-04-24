@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -21,31 +22,24 @@ body {
 }
 
 header {
-  text-align: center;
-}
-
-#task-field {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 30px;
-}
-
-#tasks-render {
-  height: 50px;
-  width: 500px;
-  margin: 0 auto;
-  border-radius: 5px;
-  border-style: dotted;
-  font-size: 20px;
   text-align: center;
+  padding: 10px 30px 30px;
 }
 
-#write-task {
-  width: 200px;
-  margin: 0px auto 0;
-  height: 50px;
+header button {
+  padding: 15px 40px;
+  margin: 30px auto 0;
   border-radius: 4px;
+  background-color: rgb(48, 86, 98, 1);
+  color: rgba(250, 246, 239, 1);
+}
+
+.text-btn:hover {
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .column-container {
@@ -55,7 +49,6 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* background-color: slateblue; */
   border-radius: 4px;
   padding: 20px;
 }
@@ -74,18 +67,17 @@ header {
 }
 
 .task-container h1 {
-  /* background-color: slateblue; */
   padding-bottom: 20px;
   border-radius: 4px;
   text-align: center;
 }
 
-.task-box, #task-modal {
+.task-box {
   display: flex;
   flex-direction: column;
   background-color: rgba(233, 220, 213, 0.4);
   padding: 4px 6px;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
   margin-bottom: 12px;
   min-height: 100px;
@@ -130,8 +122,9 @@ header {
 }
 
 .droppable {
-  background-color: rgb(102, 235, 102);
+  background-color: rgba(0, 0, 0, 0.2);
 }
+
 
 /* Modal + Backdrop */
 #backdrop {
@@ -166,7 +159,7 @@ header {
 
 #modal-style.visible {
   display: block;
-  animation: fade-slide-in 0.3s ease-out forwards;
+  animation: fade-slide-in 0.15s ease-out forwards;
 }
 
 .input-box {
@@ -209,26 +202,10 @@ header {
 }
 
 #button-row > button + button {
-  /* background-color: rgba(53, 68, 73, 1); */
   background-color: rgb(48, 86, 98, 1);
   color: rgba(250, 246, 239, 1);
 }
 
-#button-row button:hover {
-  transition: all 200ms ease-in-out;
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-#title-field {
-  display: flex;
-  flex: 1;
-}
-
-#description-id {
-  display: flex;
-  flex: 2;
-}
 
 input, label {
   margin-bottom: 5px;
@@ -253,7 +230,7 @@ textarea, input {
 
 @keyframes fade-slide-in {
   from {
-    transform: translateY(-5rem);
+    transform: translateY(-2rem);
   }
   to {
     transform: translateY(0);

@@ -18,16 +18,16 @@
   <body>
     <template id="template">
       <div class="task-box" draggable="true">
-        <div class="row">
+        <div id="title-box" class="row">
           <h3></h3>
-          <button>
+          <button id="remove-btn">
             <i class="fa-solid fa-x fa-xs"></i>
           </button>
         </div>
         <div class="task-description">
           <p></p>
         </div>
-        <div id="switch-btns" class="row">
+        <div id="button-box" class="row">
           <button id="prev">
             <i class="fa-solid fa-angle-left"></i>
           </button>
@@ -40,14 +40,7 @@
     <header>
       <h1>Task manager</h1>
       <p>Manage your tasks</p>
-      <form id="task-field">
-        <input
-          type="text"
-          id="tasks-render"
-          placeholder="Write your task here"
-        />
-        <button id="write-task" type="button">Add task here</button>
-      </form>
+        <button id="write-task" type="button" class="text-btn">Write task</button>
     </header>
     <section class="column-container">
       <div id="backlog-container" class="task-container">
@@ -75,8 +68,8 @@
           <textarea name="title" id="description" placeholder="Write your task description" rows="5"></textarea>
         </div>
         <div id="button-row">
-          <button id="cancel-btn" type="button">Cancel</button>
-          <button id="confirm-btn" type="submit">Add</button>
+          <button id="cancel-btn" type="button" class="text-btn">Cancel</button>
+          <button id="confirm-btn" type="submit" class="text-btn">Add</button>
         </div>
       </form>
     </section>
