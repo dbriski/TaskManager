@@ -1,5 +1,7 @@
-const form = document.getElementById('task-field');
-const addBtn = document.getElementById('submit-btn');
+const form = document.getElementById('task-modal');
+const addBtn = document.getElementById('confirm-btn');
+const writeTaskBtn = document.getElementById('write-task')
+const taskModalEl = document.getElementById('modal-style')
 const backlogEl = document.getElementById('backlog-container');
 const inProgressEl = document.getElementById('inprogress-container');
 const completedEl = document.getElementById('completed-container');
@@ -16,7 +18,7 @@ function createTask(task) {
   const taskTemplate = document.getElementById('template');
   const taskBody = document.importNode(taskTemplate.content, true);
   taskBody.querySelector('div').setAttribute('id', task.id);
-  taskBody.querySelector('h3').textContent = `Task no. ${task.id}`;
+  taskBody.querySelector('h3').textContent = task.title;
   taskBody.querySelector('p').textContent = task.value;
   backlogEl.append(taskBody);
   tasks.push(task);
@@ -24,15 +26,23 @@ function createTask(task) {
 }
 
 function renderTask() {
+  console.log(form.querySelector('#title-field input').value)
   if (idVal === 0) {
     idVal = 1;
   }
   const task = {
     id: idVal++,
-    value: form.querySelector('input').value,
+    title: form.querySelector('#title-field input').value, 
+    value: form.querySelector('#description-field textarea').value
   };
   createTask(task);
 }
+
+writeTaskBtn.addEventListener('click', () => {
+  const backdrop = document.getElementById('backdrop');
+  backdrop.classList.add('visible')
+  taskModalEl.classList.add('visible')
+})
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
