@@ -16,18 +16,19 @@
     <title>Task Manager</title>
   </head>
   <body>
+    <img src="/pic/birds.png" alt="birds-img">
     <template id="template">
       <div class="task-box" draggable="true">
-        <div id="title-box" class="row">
+        <div id="title-row" class="row">
           <h3></h3>
           <button id="remove-btn">
             <i class="fa-solid fa-x fa-xs"></i>
           </button>
         </div>
-        <div class="task-description">
+        <div id="task-description">
           <p></p>
         </div>
-        <div id="button-box" class="row">
+        <div id="button-row" class="row">
           <button id="prev">
             <i class="fa-solid fa-angle-left"></i>
           </button>
@@ -40,36 +41,33 @@
     <header>
       <h1>Task manager</h1>
       <p>Manage your tasks</p>
-        <button id="write-task" type="button" class="text-btn">Write task</button>
+        <button id="write-task" type="button" class="name-btn">Write task</button>
     </header>
-    <section class="column-container">
-      <div id="backlog-container" class="task-container">
+    <section id="column-container">
+      <div id="backlog" class="task-container">
         <h1>Backlog</h1>
-        <!-- <div class="task-box">
-            <p>Bla</p>
-          </div> -->
       </div>
-      <div id="inprogress-container" class="task-container">
+      <div id="inprogress" class="task-container">
         <h1>In progress</h1>
       </div>
-      <div id="completed-container" class="task-container">
+      <div id="completed" class="task-container">
         <h1>Completed</h1>
       </div>
     </section>
     <div id="backdrop"></div>
-    <section id="modal-style">
+    <section id="modal-container">
       <form id="task-modal">
-        <div id="title-field" class="input-box">
+        <div id="title-field" class="text-box">
           <label for="title">Title</label>
           <input type="text" name="title" id="title" placeholder="Write your title here"/>
         </div>
-        <div id="description-field" class="input-box"> 
+        <div id="description-field" class="text-box"> 
           <label for="description">Description</label>
           <textarea name="title" id="description" placeholder="Write your task description" rows="5"></textarea>
         </div>
-        <div id="button-row">
-          <button id="cancel-btn" type="button" class="text-btn">Cancel</button>
-          <button id="confirm-btn" type="submit" class="text-btn">Add</button>
+        <div id="button-field">
+          <button id="cancel-btn" type="button" class="name-btn">Cancel</button>
+          <button id="confirm-btn" type="submit" class="name-btn">Add</button>
         </div>
       </form>
     </section>
