@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400&family=Montserrat:wght@300;400&display=swap');
+
+:root {
+  --element-fill-light: rgba(250, 246, 239, 1);
+  --element-fill-dark: rgb(48, 86, 98, 1);
+  --smooth-alfa: rgba(0, 0, 0, 0.2);
+  --medium-alfa: rgba(0, 0, 0, 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,18 +15,25 @@
 }
 
 body {
-  position: relative;
   font-family: 'Montserrat', sans-serif;
   color: rgba(0, 0, 0, 0.7);
   min-height: 100vh;
-  background-color: #6a6b65;
-  /* background-image: linear-gradient(180deg, rgba(244, 236, 224, 0.6) 30%, rgb(212, 201, 194) 60%, #F0E0D6 100%); */
+  background-color: rgb(106, 107, 101);
   background-image: linear-gradient(
     0deg,
     rgba(244, 236, 224, 0.6) 30%,
     rgba(212, 201, 194, 1) 60%,
-    rgba(240, 224, 214, 1) 100%
+    var(--element-fill-light) 100%
   );
+}
+
+img {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  opacity: 0.5;
+  z-index: -1;
 }
 
 header {
@@ -32,17 +47,12 @@ header button {
   padding: 15px 40px;
   margin: 30px auto 0;
   border-radius: 4px;
-  background-color: rgb(48, 86, 98, 1);
-  color: rgba(250, 246, 239, 1);
+  background-color: var(--element-fill-dark);
+  color: var(--element-fill-light);
 }
 
-.text-btn:hover {
-  transition: all 200ms ease-in-out;
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.column-container {
+/* Column */
+#column-container {
   width: 80%;
   height: auto;
   margin: 0px auto;
@@ -59,9 +69,9 @@ header button {
   flex-direction: column;
   max-width: 330px;
   min-height: 500px;
-  background-color: rgba(250, 246, 239, 1);
+  background-color: var(--element-fill-light);
   border-radius: 4px;
-  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px 2px var(--smooth-alfa);
   margin: 0 10px;
   padding: 20px;
 }
@@ -72,6 +82,7 @@ header button {
   text-align: center;
 }
 
+/* Template */
 .task-box {
   display: flex;
   flex-direction: column;
@@ -81,7 +92,7 @@ header button {
   margin: 0 auto;
   margin-bottom: 12px;
   min-height: 100px;
-  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 6px 2px var(--smooth-alfa);
   border-radius: 5px;
 }
 
@@ -90,7 +101,7 @@ header button {
   justify-content: space-between;
 }
 
-.task-description {
+#task-description {
   display: flex;
   flex: 1;
 }
@@ -99,7 +110,7 @@ header button {
   white-space: wrap;
   word-wrap: break-word;
   font-size: 16px;
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--medium-alfa);
   padding: 6px 0;
   overflow: hidden;
   display: inline-block;
@@ -122,18 +133,23 @@ header button {
 }
 
 .droppable {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--smooth-alfa);
 }
 
+.name-btn:hover {
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  opacity: 0.8;
+}
 
-/* Modal + Backdrop */
+/* Backdrop and Modal */
 #backdrop {
   position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--medium-alfa);
   z-index: 10;
   pointer-events: none;
   display: none;
@@ -144,7 +160,7 @@ header button {
   pointer-events: all;
 }
 
-#modal-style {
+#modal-container {
   position: fixed;
   min-width: 300px;
   max-width: 350px;
@@ -157,17 +173,9 @@ header button {
   display: none;
 }
 
-#modal-style.visible {
+#modal-container.visible {
   display: block;
   animation: fade-slide-in 0.15s ease-out forwards;
-}
-
-.input-box {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 5px;
 }
 
 #task-modal {
@@ -179,35 +187,20 @@ header button {
   margin: 0 auto;
   margin-bottom: 12px;
   min-height: 100px;
-  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 6px 2px var(--smooth-alfa);
   border-radius: 5px;
 }
 
-#button-row {
+.text-box {
   display: flex;
-  flex: 1;
-  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
-  margin-top: 7px;
+  height: 100%;
+  margin-bottom: 5px;
 }
 
-#button-row button {
-  border-style: none;
-  border-radius: 4px;
-  background-color: rgba(250, 246, 239, 1);
-  color: rgb(48, 86, 98, 1);
-  padding: 8px 16px;
-  min-width: 100px;
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
-}
-
-#button-row > button + button {
-  background-color: rgb(48, 86, 98, 1);
-  color: rgba(250, 246, 239, 1);
-}
-
-
-input, label {
+input,
+label {
   margin-bottom: 5px;
 }
 
@@ -220,13 +213,36 @@ textarea {
   padding: 6px 8px;
 }
 
-textarea, input {
+textarea,
+input {
   outline: none;
   border: none;
   border-radius: 2px;
-  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px 2px var(--smooth-alfa);
 }
 
+#button-field {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 7px;
+}
+
+#button-field button {
+  border-style: none;
+  border-radius: 4px;
+  background-color: var(--element-fill-light);
+  color: var(--element-fill-dark);
+  padding: 8px 16px;
+  min-width: 100px;
+  box-shadow: 0 0 4px 1px var(--smooth-alfa);
+}
+
+#button-field > button + button {
+  background-color: var(--element-fill-dark);
+  color: var(--element-fill-light);
+}
 
 @keyframes fade-slide-in {
   from {
